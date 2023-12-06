@@ -1,0 +1,13 @@
+.icoses {
+  fill: rgb(0, 255, 98);
+  /* stroke: blue; */
+  width: 32px;
+  height: 32px;
+  /* background-color: aquamarine; */
+  /* viewbox: 8px; */
+}
+.ises {
+  width: 250px;
+  height: 250px;
+  background-color: aquamarine;
+}
