@@ -36,7 +36,7 @@ export class ImageGallery extends Component {
   };
 
   render() {
-    const { galery, loading } = this.state;
+    const { galery } = this.state;
     const { request } = this.props;
 
     return (
