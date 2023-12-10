@@ -42,7 +42,7 @@ export class App extends Component {
         />
         {isShowModal && (
           <Modal
-            toggleModal={this.toggleModal}
+            // toggleModal={this.toggleModal}
             closeModalBtn={this.closeModalBtn}
             modalImage={modalImage}
           />
