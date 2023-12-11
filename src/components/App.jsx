@@ -3,13 +3,13 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Searchbar } from './Searchbar/Searchbar';
 import { ImageGallery } from './ImageGallery/ImageGallery';
-// import { Modal } from './Modal/Modal';
+import { Modal } from './Modal/Modal';
 
 export class App extends Component {
   state = {
     request: '',
     page: 1,
-    // isShowModal: false,
+    isShowModal: false,
     // modalImage: '',
   };
   formSubmitHandler = data => {
@@ -28,9 +28,9 @@ export class App extends Component {
   //     isShowModal: !prev.isShowModal,
   //   }));
   // };
-  // , isShowModal, modalImage
+  // , modalImage
   render() {
-    const { request, page } = this.state;
+    const { request, page, isShowModal } = this.state;
     return (
       <>
         <ToastContainer autoClose={1500} />
@@ -40,13 +40,13 @@ export class App extends Component {
           page={page}
           // showModal={this.showModal}
         />
-        {/* {isShowModal && (
+        {isShowModal && (
           <Modal
-            // toggleModal={this.toggleModal}
-            closeModalBtn={this.closeModalBtn}
-            modalImage={modalImage}
+
+          // closeModalBtn={this.closeModalBtn}
+          // modalImage={modalImage}
           />
-        )} */}
+        )}
       </>
     );
   }
