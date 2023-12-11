@@ -5,7 +5,6 @@ import css from './index.module.css';
 export class Modal extends Component {
   handleEsc = e => {
     if (e.code === 'Escape') this.props.closeModalBtn();
-    console.log('Press');
   };
   componentDidMount() {
     document.addEventListener('keydown', this.handleEsc);
@@ -19,7 +18,7 @@ export class Modal extends Component {
     const { closeModalBtn, modalImage } = this.props;
     return (
       <div className={css.Overlay} onClick={closeModalBtn}>
-        <div className={css.Modal}>
+        <div className={css.Modal} onClick={e => e.stopPropagation()}>
           {/* <button
             type="button"
             className={css.btnClose}

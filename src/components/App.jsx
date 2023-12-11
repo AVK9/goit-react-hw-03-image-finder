@@ -18,10 +18,13 @@ export class App extends Component {
     });
   };
   showModal = modalImage => {
-    this.setState({ isShowModal: true, modalImage: modalImage });
+    this.setState({
+      isShowModal: true,
+      modalImage: modalImage,
+    });
   };
   closeModalBtn = () => {
-    this.setState({ isShowModal: false });
+    this.setState({ isShowModal: false, modalImage: '' });
   };
   // toggleModal = () => {
   //   this.setState(prev => ({
