@@ -1,0 +1,39 @@
+.Overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 1200;
+}
+
+.Modal {
+  max-width: calc(100vw - 248px);
+  max-height: calc(100vh - 224px);
+  /* background-color: bisque; */
+  position: relative;
+  /* width: 500px;
+  height: 500px; */
+}
+.btnClose {
+  position: absolute;
+  margin-top: 15px;
+  margin-right: 15px;
+  right: 0;
+  top: 0;
+  background-color: blue;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+.icon {
+  display: block;
+  margin: 0 auto;
+  fill: aliceblue;
+  width: 20px;
+  height: 20px;
+}
