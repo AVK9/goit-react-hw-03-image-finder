@@ -1,10 +1,10 @@
 import { Component } from 'react';
 import css from './Modal.module.css';
-import { AiOutlineClose } from 'react-icons/ai';
+// import { AiOutlineClose } from 'react-icons/ai';
 
 export class Modal extends Component {
   handleEsc = e => {
-    if (e.code === 'Escape') this.props.toggleModal();
+    if (e.code === 'Escape') this.props.closeModalBtn();
     console.log('Press');
   };
   componentDidMount() {
@@ -18,16 +18,16 @@ export class Modal extends Component {
   render() {
     const { closeModalBtn, modalImage } = this.props;
     return (
-      <div className={css.Overlay}>
+      <div className={css.Overlay} onClick={closeModalBtn}>
         <div className={css.Modal}>
-          <button
+          {/* <button
             type="button"
             className={css.btnClose}
             aria-label="Close"
             onClick={closeModalBtn}
           >
             <AiOutlineClose className={css.icon} />
-          </button>
+          </button> */}
           <div className="modal-content">
             <div className="modal-body">
               <img src={modalImage} alt="" />
