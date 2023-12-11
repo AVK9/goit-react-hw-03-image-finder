@@ -10,27 +10,27 @@ export class App extends Component {
     request: '',
     page: 1,
     isShowModal: false,
-    // modalImage: '',
+    modalImage: '',
   };
   formSubmitHandler = data => {
     this.setState({
       request: data,
     });
   };
-  // showModal = modalImage => {
-  //   this.setState({ isShowModal: true, modalImage: modalImage });
-  // };
-  // closeModalBtn = () => {
-  //   this.setState({ isShowModal: false });
-  // };
+  showModal = modalImage => {
+    this.setState({ isShowModal: true, modalImage: modalImage });
+  };
+  closeModalBtn = () => {
+    this.setState({ isShowModal: false });
+  };
   // toggleModal = () => {
   //   this.setState(prev => ({
   //     isShowModal: !prev.isShowModal,
   //   }));
   // };
-  // , modalImage
+  //
   render() {
-    const { request, page, isShowModal } = this.state;
+    const { request, page, isShowModal, modalImage } = this.state;
     return (
       <>
         <ToastContainer autoClose={1500} />
@@ -38,14 +38,10 @@ export class App extends Component {
         <ImageGallery
           request={request}
           page={page}
-          // showModal={this.showModal}
+          showModal={this.showModal}
         />
         {isShowModal && (
-          <Modal
-
-          // closeModalBtn={this.closeModalBtn}
-          // modalImage={modalImage}
-          />
+          <Modal closeModalBtn={this.closeModalBtn} modalImage={modalImage} />
         )}
       </>
     );
