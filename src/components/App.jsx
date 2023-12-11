@@ -3,34 +3,34 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Searchbar } from './Searchbar/Searchbar';
 import { ImageGallery } from './ImageGallery/ImageGallery';
-import { Modal } from './Modal/Modal';
+// import { Modal } from './Modal/Modal';
 
 export class App extends Component {
   state = {
     request: '',
     page: 1,
-    isShowModal: false,
-    modalImage: '',
+    // isShowModal: false,
+    // modalImage: '',
   };
   formSubmitHandler = data => {
     this.setState({
       request: data,
     });
   };
-  showModal = modalImage => {
-    this.setState({ isShowModal: true, modalImage: modalImage });
-  };
-  closeModalBtn = () => {
-    this.setState({ isShowModal: false });
-  };
+  // showModal = modalImage => {
+  //   this.setState({ isShowModal: true, modalImage: modalImage });
+  // };
+  // closeModalBtn = () => {
+  //   this.setState({ isShowModal: false });
+  // };
   // toggleModal = () => {
   //   this.setState(prev => ({
   //     isShowModal: !prev.isShowModal,
   //   }));
   // };
-
+  // , isShowModal, modalImage
   render() {
-    const { request, page, isShowModal, modalImage } = this.state;
+    const { request, page } = this.state;
     return (
       <>
         <ToastContainer autoClose={1500} />
@@ -38,15 +38,15 @@ export class App extends Component {
         <ImageGallery
           request={request}
           page={page}
-          showModal={this.showModal}
+          // showModal={this.showModal}
         />
-        {isShowModal && (
+        {/* {isShowModal && (
           <Modal
             // toggleModal={this.toggleModal}
             closeModalBtn={this.closeModalBtn}
             modalImage={modalImage}
           />
-        )}
+        )} */}
       </>
     );
   }
