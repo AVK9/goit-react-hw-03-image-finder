@@ -1,8 +1,8 @@
 import { Component } from 'react';
-import css from './Modal.module.css';
+// import css from './Modal.module.css';
 // import { AiOutlineClose } from 'react-icons/ai';
 
-export class Modal extends Component {
+export default class Modal extends Component {
   // handleEsc = e => {
   //   if (e.code === 'Escape') this.props.closeModalBtn();
   //   console.log('Press');
