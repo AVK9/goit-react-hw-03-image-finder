@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { ToastContainer } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Searchbar } from './Searchbar/Searchbar';
 import { ImageGallery } from './ImageGallery/ImageGallery';
@@ -13,9 +13,13 @@ export class App extends Component {
     modalImage: '',
   };
   formSubmitHandler = data => {
-    this.setState({
-      request: data,
-    });
+    if (this.state.request !== data) {
+      this.setState({
+        request: data,
+      });
+    } else {
+      toast.warn('This request is already running, please enter another one');
+    }
   };
   showModal = modalImage => {
     this.setState({

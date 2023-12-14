@@ -16,40 +16,69 @@ export class ImageGallery extends Component {
     total: 0,
     totaltot: 0,
   };
+
   componentDidUpdate(prevProps, prevState) {
-    const { page } = this.state;
+    const { page, galery } = this.state;
+
     const prevRequest = prevProps.request;
     const carrRequest = this.props.request;
+    console.log('prevRequest :>> ', prevRequest);
+    console.log('carrRequest :>> ', carrRequest);
     if (prevRequest !== carrRequest) {
-      // console.log('Изменилось имя запроса');
-      this.setState({ page: 1 });
+      const getGalerys = async carrRequest => {
+        this.setState({ loading: true });
+        try {
+          const { page, galery, request } = this.state;
+          console.log('request :>> ', request);
+          const response = await GetApi(carrRequest, page);
+          this.setState({
+            galery: [...response.hits],
+            total: response.hits.length,
+            totaltot: response.totalHits,
+          });
+          console.log('response :>> ', response);
+        } catch (error) {
+          this.setState({ error: error.message });
+        } finally {
+          this.setState({ loading: false });
+        }
+      };
+      console.log('Изменилось имя запроса');
+      // this.setState({ page: 1 });
+      this.setState(prevState => ({
+        galery: [],
+        page: 1,
+      }));
+      getGalerys(carrRequest);
     }
 
     if (prevRequest !== carrRequest || prevState.page !== page) {
-      // console.log('Изменилось имя пакемона');
+      const getGalerys = async carrRequest => {
+        this.setState({ loading: true });
+        try {
+          const { page, galery, request } = this.state;
+          console.log('request :>> ', request);
+          const response = await GetApi(carrRequest, page);
+          this.setState({
+            galery: [...galery, ...response.hits],
+            total: response.hits.length,
+            totaltot: response.totalHits,
+          });
+          console.log('response :>> ', response);
+        } catch (error) {
+          this.setState({ error: error.message });
+        } finally {
+          this.setState({ loading: false });
+        }
+      };
+      console.log('Изменилось API');
+      console.log('galery :>> ', galery);
 
       this.setState({ request: carrRequest });
-      this.getGalerys(carrRequest);
+      getGalerys(carrRequest);
     }
   }
 
-  getGalerys = async carrRequest => {
-    this.setState({ loading: true });
-    try {
-      const { page, galery } = this.state;
-      const response = await GetApi(carrRequest, page);
-      this.setState({
-        galery: [...galery, ...response.hits],
-        total: response.hits.length,
-        totaltot: response.totalHits,
-      });
-      console.log('response :>> ', response);
-    } catch (error) {
-      this.setState({ error: error.message });
-    } finally {
-      this.setState({ loading: false });
-    }
-  };
   clickLoadMore = () => {
     this.setState(prevState => ({ page: prevState.page + 1 }));
   };
@@ -99,8 +128,11 @@ export class ImageGallery extends Component {
           </ul>
         )}
 
-        {!loading && total >= 12 && <Button onClick={this.clickLoadMore} />}
-        {total <= 12 && page === Math.ceil(totaltot / 12) && (
+        {!loading &&
+          totaltot !== 0 &&
+          galery.length < totaltot &&
+          total >= 12 && <Button onClick={this.clickLoadMore} />}
+        {totaltot !== 0 && galery.length === totaltot && (
           <div className={css.messageFinish} hidden>
             🔴 We're sorry, but you've reached the end of search results.
           </div>

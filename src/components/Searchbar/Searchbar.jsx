@@ -15,6 +15,7 @@ export class Searchbar extends Component {
   };
   handleSubmit = e => {
     e.preventDefault();
+
     if (this.state.request === '') {
       return toast.warn('Please enter your request!');
     }
