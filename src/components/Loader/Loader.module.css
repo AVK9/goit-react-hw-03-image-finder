@@ -1,12 +1,13 @@
 .boxLoader {
-  position: fixed;
-  top: 100;
-  left: 0;
   width: 100vw;
   height: 100vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.2);
   z-index: 1200;
+}
+.boxName {
+  font-size: 32px;
 }

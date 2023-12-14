@@ -1,5 +1,6 @@
 import { GetApi } from 'api/api';
 import { Component } from 'react';
+import { toast } from 'react-toastify';
 import css from './ImageGallery.module.css';
 import { ImageGalleryItem } from '../ImageGalleryItem/ImageGalleryItem';
 import { Button } from '../Button/Button';
@@ -20,12 +21,12 @@ export class ImageGallery extends Component {
     const prevRequest = prevProps.request;
     const carrRequest = this.props.request;
     if (prevRequest !== carrRequest) {
-      console.log('Изменилось имя запроса');
+      // console.log('Изменилось имя запроса');
       this.setState({ page: 1 });
     }
 
     if (prevRequest !== carrRequest || prevState.page !== page) {
-      console.log('Изменилось имя пакемона');
+      // console.log('Изменилось имя пакемона');
 
       this.setState({ request: carrRequest });
       this.getGalerys(carrRequest);
@@ -35,12 +36,12 @@ export class ImageGallery extends Component {
   getGalerys = async carrRequest => {
     this.setState({ loading: true });
     try {
-      const { page } = this.state;
+      const { page, galery } = this.state;
       const response = await GetApi(carrRequest, page);
       this.setState({
-        galery: response.hits,
+        galery: [...galery, ...response.hits],
         total: response.hits.length,
-        totaltot: response.total,
+        totaltot: response.totalHits,
       });
       console.log('response :>> ', response);
     } catch (error) {
@@ -54,27 +55,34 @@ export class ImageGallery extends Component {
   };
 
   render() {
-    const { galery, loading, total, page, error } = this.state;
-    const { request, showModal } = this.props;
+    const { galery, loading, total, page, error, totaltot } = this.state;
+    const { showModal, request } = this.props;
+    //
     // console.log('galery :>> ', galery.length);
     return (
       <div>
-        {(total === 0 && request !== '' && (
-          <h1>
-            Sorry, no images were found for your request, please try another
-            request
-          </h1>
-        )) ||
-          (loading && <h1>Loading, please wait...</h1>) ||
-          (error && <h1>Error {error}</h1>) ||
-          (total === 0 && page !== 1 && (
-            <h1>There are no more pictures, please try another request</h1>
-          )) ||
-          (galery.length !== 0 && (
-            <h1 className={css.title1}>
-              Here's what we were able to find on request: "{request}"
-            </h1>
-          ))}
+        {total === 0 &&
+          request !== '' &&
+          ((
+            <div className={css.boxMessage}>
+              <p className={css.messageName}>
+                Sorry, no images were found for your request, please try another
+                request
+              </p>
+            </div>
+          ) ||
+            (error && (
+              <div className={css.boxMessage}>
+                <p className={css.messageName}>Error {error}</p>
+              </div>
+            )) ||
+            (total === 0 && page !== 1 && (
+              <div className={css.boxMessage}>
+                <p className={css.messageName}>
+                  There are no more pictures, please try another request
+                </p>
+              </div>
+            )))}
         {loading && <Loader />}
         {!loading && (
           <ul className={css.ImageGallery}>
@@ -92,6 +100,11 @@ export class ImageGallery extends Component {
         )}
 
         {!loading && total >= 12 && <Button onClick={this.clickLoadMore} />}
+        {total <= 12 && page === Math.ceil(totaltot / 12) && (
+          <div className={css.messageFinish} hidden>
+            🔴 We're sorry, but you've reached the end of search results.
+          </div>
+        )}
       </div>
     );
   }

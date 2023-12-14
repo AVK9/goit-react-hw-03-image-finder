@@ -13,6 +13,7 @@ export const Loader = () => {
         wrapperClass=""
         visible={true}
       />
+      <p className={css.boxName}>Loading process, please wait </p>
     </div>
   );
 };
