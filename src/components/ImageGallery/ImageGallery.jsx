@@ -1,6 +1,6 @@
 import { GetApi } from 'api/api';
 import { Component } from 'react';
-import { toast } from 'react-toastify';
+// import { toast } from 'react-toastify';
 import css from './ImageGallery.module.css';
 import { ImageGalleryItem } from '../ImageGalleryItem/ImageGalleryItem';
 import { Button } from '../Button/Button';
