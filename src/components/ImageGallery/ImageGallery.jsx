@@ -28,7 +28,7 @@ export class ImageGallery extends Component {
       const getGalerys = async carrRequest => {
         this.setState({ loading: true });
         try {
-          const { page, galery, request } = this.state;
+          const { page, request } = this.state;
           console.log('request :>> ', request);
           const response = await GetApi(carrRequest, page);
           this.setState({
